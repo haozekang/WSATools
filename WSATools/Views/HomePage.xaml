@@ -1,0 +1,125 @@
+﻿<Page x:Class="WSATools.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+      xmlns:local="clr-namespace:WSATools"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="HomePage"
+      DataContext="{Binding Source={StaticResource Locator}, Path=Home}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="5 0 5 0" Orientation="Horizontal">
+            <icon:PackIconMaterial Kind="AndroidStudio" VerticalAlignment="Center"></icon:PackIconMaterial>
+            <Label Content="{DynamicResource ADB版本}"></Label>
+            <Label Content="：" Padding="0" VerticalContentAlignment="Center"></Label>
+            <Label Content="{Binding AdbVersion, UpdateSourceTrigger=PropertyChanged}" Padding="0 0 0 0" VerticalContentAlignment="Center"></Label>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Margin="5 0 5 0" Orientation="Horizontal" Visibility="{Binding NoWSAVisibility}">
+            <icon:PackIconMaterial Kind="TransitConnectionVariant" VerticalAlignment="Center"></icon:PackIconMaterial>
+            <Label Content="{DynamicResource 未安装WSA}"></Label>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Margin="5 0 5 0" Orientation="Horizontal" Visibility="{Binding ConnectedVisibility}">
+            <icon:PackIconMaterial Kind="TransitConnectionVariant" VerticalAlignment="Center"></icon:PackIconMaterial>
+            <Label Content="{DynamicResource 已连接至WSA}"></Label>
+            <Label Content="：" Padding="0" VerticalContentAlignment="Center"></Label>
+            <Label Content="{Binding Model, UpdateSourceTrigger=PropertyChanged}" Padding="0 0 0 0" VerticalContentAlignment="Center"></Label>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Margin="5 0 5 0" Orientation="Horizontal" Visibility="{Binding WaitingConnectedVisibility}">
+            <icon:PackIconMaterial Kind="TransitConnectionVariant" VerticalAlignment="Center"></icon:PackIconMaterial>
+            <Label Content="{DynamicResource 等待连接至WSA}"></Label>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Margin="5 0 5 0" Orientation="Horizontal" Visibility="{Binding FailedConnectedVisibility}">
+            <icon:PackIconMaterial Kind="TransitConnectionVariant" VerticalAlignment="Center"></icon:PackIconMaterial>
+            <Label Content="{DynamicResource 连接至WSA失败}"></Label>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Margin="5 0 5 0" Orientation="Horizontal" Visibility="{Binding ConnectedVisibility}">
+            <icon:PackIconFontAwesome Kind="AndroidBrands" VerticalAlignment="Center"></icon:PackIconFontAwesome>
+            <Label Content="{DynamicResource 安卓版本}"></Label>
+            <Label Content="：" Padding="0" VerticalContentAlignment="Center"></Label>
+            <Label Content="{Binding AndroidVersion, UpdateSourceTrigger=PropertyChanged}" Padding="0 0 0 0" VerticalContentAlignment="Center"></Label>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Margin="5 0 5 0" Orientation="Horizontal" Visibility="{Binding ConnectedVisibility}">
+            <icon:PackIconFontAwesome Kind="LinuxBrands" VerticalAlignment="Center"></icon:PackIconFontAwesome>
+            <Label Content="{DynamicResource Linux内核}"></Label>
+            <Label Content="：" Padding="0" VerticalContentAlignment="Center"></Label>
+            <Label Content="{Binding LinuxKernel, UpdateSourceTrigger=PropertyChanged}" Padding="0 0 0 0" VerticalContentAlignment="Center"></Label>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Margin="5 0 5 0" Orientation="Horizontal" Visibility="{Binding ConnectedVisibility}">
+            <icon:PackIconFontAwesome Kind="MemorySolid" VerticalAlignment="Center"></icon:PackIconFontAwesome>
+            <Label Content="{DynamicResource 总内存}"></Label>
+            <Label Content="：" Padding="0" VerticalContentAlignment="Center"></Label>
+            <Label Content="{Binding TotalMemory, UpdateSourceTrigger=PropertyChanged}" Padding="0 0 0 0" VerticalContentAlignment="Center"></Label>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Margin="5 5 5 0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding btn_open_wsa_setting_Click}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <icon:PackIconRemixIcon Kind="SettingsLine" VerticalAlignment="Center"></icon:PackIconRemixIcon>
+                        <Label Content="{DynamicResource WSA设置}" Padding="5 0 5 0"></Label>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Margin="5 0 0 0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding btn_open_android_setting_Click}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <icon:PackIconRemixIcon Kind="SettingsLine" VerticalAlignment="Center"></icon:PackIconRemixIcon>
+                        <Label Content="{DynamicResource Android设置}" Padding="5 0 5 0"></Label>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Margin="5 0 0 0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding btn_open_wsa_baidupan_page_Click}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <icon:PackIconFontAwesome Kind="StoreSolid" VerticalAlignment="Center"></icon:PackIconFontAwesome>
+                        <Label Content="{DynamicResource WSA百度云}" Padding="5 0 5 0"></Label>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Margin="5 0 0 0" Visibility="Collapsed">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding btn_scan_qrcode_Click}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <icon:PackIconRemixIcon Kind="QrScan2Line" VerticalAlignment="Center"></icon:PackIconRemixIcon>
+                        <Label Content="{DynamicResource 扫描二维码}" Padding="5 0 5 0"></Label>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

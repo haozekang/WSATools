@@ -1,0 +1,68 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!-- Windows -->
+    <sys:String x:Key="WSA工具箱">WSA工具箱</sys:String>
+    <sys:String x:Key="语言">语言</sys:String>
+    <sys:String x:Key="问题反馈">问题反馈</sys:String>
+    <sys:String x:Key="操作">操作</sys:String>
+
+    <!-- TabControl -->
+    <sys:String x:Key="首页">首页</sys:String>
+    <sys:String x:Key="安装APK">安装APK</sys:String>
+    <sys:String x:Key="APP管理">APP管理</sys:String>
+    <sys:String x:Key="进程列表">进程列表</sys:String>
+    <sys:String x:Key="文件传输">文件传输</sys:String>
+    <sys:String x:Key="Shell">Shell</sys:String>
+    <!-- 首页 -->
+    <sys:String x:Key="WSA设置">WSA设置</sys:String>
+    <sys:String x:Key="Android设置">Android设置</sys:String>
+    <sys:String x:Key="WSA应用商店页面">WSA应用商店页面</sys:String>
+    <sys:String x:Key="WSA百度云">WSA百度云 密码:6666</sys:String>
+    <sys:String x:Key="扫描二维码">扫描二维码</sys:String>
+    <sys:String x:Key="ADB版本">ADB版本</sys:String>
+    <sys:String x:Key="未安装WSA">未安装WSA</sys:String>
+    <sys:String x:Key="已连接至WSA">已连接至WSA</sys:String>
+    <sys:String x:Key="等待连接至WSA">等待连接至Windows Subsystem for Android...</sys:String>
+    <sys:String x:Key="连接至WSA失败">连接至Windows Subsystem for Android失败</sys:String>
+    <sys:String x:Key="安卓版本">安卓版本</sys:String>
+    <sys:String x:Key="Linux内核">Linux内核</sys:String>
+    <sys:String x:Key="总内存">总内存</sys:String>
+
+    <!-- 安装APK -->
+    <sys:String x:Key="从APK文件安装">从APK文件安装</sys:String>
+    <sys:String x:Key="请选择APK文件">请选择APK文件</sys:String>
+    <sys:String x:Key="APK文件地址">APK文件地址</sys:String>
+    <sys:String x:Key="选择">选择</sys:String>
+    <sys:String x:Key="安装">安装</sys:String>
+
+    <!-- APP管理 -->
+    <sys:String x:Key="启动APP">启动APP</sys:String>
+    <sys:String x:Key="关闭APP">关闭APP</sys:String>
+    <sys:String x:Key="创建快捷方式">创建快捷方式</sys:String>
+    <sys:String x:Key="卸载APP">卸载APP</sys:String>
+    <sys:String x:Key="APP名称">APP名称</sys:String>
+    <sys:String x:Key="APP包名称">APP包名称</sys:String>
+    <sys:String x:Key="APP版本">APP版本</sys:String>
+    <sys:String x:Key="运行状态">运行状态</sys:String>
+
+    <!-- 进程列表 -->
+    <sys:String x:Key="刷新">刷新</sys:String>
+    <sys:String x:Key="自动刷新">自动刷新</sys:String>
+    <sys:String x:Key="进程名称">进程名称</sys:String>
+    <sys:String x:Key="CPU时间">%CPU时间</sys:String>
+    <sys:String x:Key="常驻内存大小">常驻内存大小</sys:String>
+
+    <!-- 文件传输 -->
+    <sys:String x:Key="根文件夹">根文件夹</sys:String>
+    <sys:String x:Key="新建目录">新建目录</sys:String>
+    <sys:String x:Key="下载">下载</sys:String>
+    <sys:String x:Key="上传">上传</sys:String>
+    <sys:String x:Key="删除">删除</sys:String>
+    <sys:String x:Key="地址">地址</sys:String>
+    <sys:String x:Key="名称">名称</sys:String>
+    <sys:String x:Key="类型">类型</sys:String>
+    <sys:String x:Key="最后修改时间">最后修改时间</sys:String>
+    <sys:String x:Key="大小">大小</sys:String>
+    <sys:String x:Key="重命名">重命名</sys:String>
+</ResourceDictionary>

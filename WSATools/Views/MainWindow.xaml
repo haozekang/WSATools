@@ -1,0 +1,49 @@
+﻿<mah:MetroWindow x:Class="WSATools.MainWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                 xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+                 xmlns:local="clr-namespace:WSATools"
+                 mc:Ignorable="d" Loaded="wsa_Loaded"
+                 WindowStartupLocation="CenterScreen"  Icon="/Images/android.png"
+                 Title="{DynamicResource WSA工具箱}" TitleCharacterCasing="Normal" Height="450" Width="800">
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+            <mah:DropDownButton Name="btn_language" Content="{DynamicResource 语言}" Click="btn_language_Click">
+                <mah:DropDownButton.Icon>
+                    <icon:PackIconFontAwesome Kind="LanguageSolid"></icon:PackIconFontAwesome>
+                </mah:DropDownButton.Icon>
+            </mah:DropDownButton>
+            <Button Name="btn_feedback" Click="btn_feedback_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <icon:PackIconFontAwesome Kind="GithubSquareBrands"></icon:PackIconFontAwesome>
+                        <TextBlock Margin="5 0 0 0" Text="{DynamicResource 问题反馈}" VerticalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </mah:WindowCommands>
+    </mah:MetroWindow.RightWindowCommands>
+    <Grid>
+        <mah:MetroAnimatedSingleRowTabControl Margin="0 1 0 0">
+            <mah:MetroTabItem Header="{DynamicResource 首页}" Margin="0 0 0 0" Padding="10 5 5 5" Background="White">
+                <Frame Source="/Views/HomePage.xaml"></Frame>
+            </mah:MetroTabItem>
+            <mah:MetroTabItem Header="{DynamicResource 安装APK}" Margin="0 0 0 0" Padding="10 5 5 5" Background="White">
+                <Frame Source="/Views/InstallApkPage.xaml"></Frame>
+            </mah:MetroTabItem>
+            <mah:MetroTabItem Header="{DynamicResource APP管理}" Margin="0 0 0 0" Padding="10 5 5 5" Background="White">
+                <Frame Source="/Views/AppManagerPage.xaml"></Frame>
+            </mah:MetroTabItem>
+            <mah:MetroTabItem Header="{DynamicResource 文件传输}" Margin="0 0 0 0" Padding="10 5 5 5" Background="White">
+                <Frame Source="/Views/FileTransferPage.xaml"></Frame>
+            </mah:MetroTabItem>
+            <mah:MetroTabItem Header="{DynamicResource Shell}" Margin="0 0 0 0" Padding="10 5 5 5" Background="White">
+                <Frame Source="/Views/ShellPage.xaml"></Frame>
+            </mah:MetroTabItem>
+        </mah:MetroAnimatedSingleRowTabControl>
+    </Grid>
+</mah:MetroWindow>

@@ -1,0 +1,71 @@
+﻿<Page x:Class="WSATools.InstallApkPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+      xmlns:local="clr-namespace:WSATools"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="InstallApkPage"
+      DataContext="{Binding Source={StaticResource Locator}, Path=InstallApk}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Margin="5 0 5 0" Orientation="Horizontal">
+                <icon:PackIconFontAwesome Kind="FileAltRegular" VerticalAlignment="Center"></icon:PackIconFontAwesome>
+                <Label Content="{DynamicResource 请选择APK文件}"></Label>
+            </StackPanel>
+            <TextBox Grid.Row="1" Margin="5 0 5 0" Text="{Binding ApkFilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     AllowDrop="True"
+                     mah:TextBoxHelper.IsWaitingForData="True"
+                     mah:TextBoxHelper.UseFloatingWatermark="True"
+                     mah:TextBoxHelper.Watermark="{DynamicResource APK文件地址}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Drop">
+                        <i:InvokeCommandAction Command="{Binding txt_Drop}" PassEventArgsToCommand="True"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
+            <StackPanel Grid.Row="2" Margin="5 5 5 0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding btn_show_select_apk_dialog_Click}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <icon:PackIconFontAwesome Kind="FolderOpenRegular" VerticalAlignment="Center"></icon:PackIconFontAwesome>
+                            <Label Content="{DynamicResource 选择}" Padding="5 0 5 0"></Label>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                <Button Margin="5 0 0 0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding btn_install_apk_Click}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <icon:PackIconRemixIcon Kind="InstallLine" VerticalAlignment="Center"></icon:PackIconRemixIcon>
+                            <Label Content="{DynamicResource 安装}" Padding="5 0 5 0"></Label>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Page>

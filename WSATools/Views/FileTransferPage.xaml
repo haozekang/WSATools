@@ -1,0 +1,192 @@
+﻿<Page x:Class="WSATools.FileTransferPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+      xmlns:command="clr-namespace:WinCopies.Util.Commands;assembly=WinCopies.Util.Desktop"
+      xmlns:local="clr-namespace:WSATools"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="FileTransferPage" 
+      DataContext="{Binding Source={StaticResource Locator}, Path=FileTransfer}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Margin="5 0 5 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Content="{DynamicResource 地址}"></Label>
+            <Label Grid.Column="1" Content=":" Padding="0 0 5 0" VerticalContentAlignment="Center"></Label>
+            <TextBox Grid.Column="2" Text="{Binding DirectoryPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="KeyDown">
+                        <i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=FileTransfer.txt_path_KeyDown}"
+                                               PassEventArgsToCommand="True"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
+            <Button Grid.Column="3" Margin="5 0 0 0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=FileTransfer.btn_refresh_Click}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <icon:PackIconRemixIcon Kind="Search2Line" Height="10" VerticalAlignment="Center"></icon:PackIconRemixIcon>
+                        <Label Content="{DynamicResource 刷新}" Margin="0 -2 0 0" Padding="0 0 5 0" VerticalContentAlignment="Center"></Label>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Grid.Column="4" Margin="5 0 0 0" Height="25">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=FileTransfer.btn_upload_file_Click}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <icon:PackIconRemixIcon Kind="Upload2Line" Height="10" VerticalAlignment="Center"></icon:PackIconRemixIcon>
+                        <Label Content="{DynamicResource 上传}" Margin="0 -2 0 0" Padding="0 0 5 0" VerticalContentAlignment="Center"></Label>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Grid.Column="5" Margin="5 0 0 0" Height="25">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=FileTransfer.btn_mkdir_Click}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <icon:PackIconRemixIcon Kind="Folder2Line" Height="10" VerticalAlignment="Center"></icon:PackIconRemixIcon>
+                        <Label Content="{DynamicResource 新建目录}" Margin="0 -2 0 0" Padding="0 0 5 0" VerticalContentAlignment="Center"></Label>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </Grid>
+        <DataGrid Grid.Row="1" Margin="0 5 0 0" AutoGenerateColumns="False"
+                  BorderThickness="0 1 0 0" AllowDrop="True"
+                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False"
+                  ItemsSource="{Binding PathItems, UpdateSourceTrigger=PropertyChanged}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Drop">
+                    <i:InvokeCommandAction Command="{Binding datagrid_Drop}" PassEventArgsToCommand="True"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow" BasedOn="{StaticResource MahApps.Styles.DataGridRow}">
+                    <Setter Property="command:CommandBehavior.Event" Value="MouseDoubleClick"/>
+                    <Setter Property="command:CommandBehavior.Command" Value="{Binding DataContext.btn_path_item_DoubleClick, RelativeSource={RelativeSource FindAncestor, AncestorType=Page}}"/>
+                    <Setter Property="command:CommandBehavior.CommandParameter" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext}"></Setter>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Name}" IsReadOnly="True">
+                    <DataGridTextColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <icon:PackIconMaterial Kind="FormatListBulleted"></icon:PackIconMaterial>
+                            <TextBlock Margin="5 0 0 0" Text="{DynamicResource 名称}"></TextBlock>
+                        </StackPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Type}" IsReadOnly="True">
+                    <DataGridTextColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <icon:PackIconFontAwesome Kind="FolderRegular"></icon:PackIconFontAwesome>
+                            <TextBlock Margin="5 0 0 0" Text="{DynamicResource 类型}"></TextBlock>
+                        </StackPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding LastModifyTime, StringFormat='yyyy/MM/dd HH:mm'}" IsReadOnly="True">
+                    <DataGridTextColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <icon:PackIconFontAwesome Kind="ClockRegular"></icon:PackIconFontAwesome>
+                            <TextBlock Margin="5 0 0 0" Text="{DynamicResource 最后修改时间}"></TextBlock>
+                        </StackPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding SizeKilobyte}" IsReadOnly="True">
+                    <DataGridTextColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <icon:PackIconFontAwesome Kind="HddRegular"></icon:PackIconFontAwesome>
+                            <TextBlock Margin="5 0 0 0" Text="{DynamicResource 大小}"></TextBlock>
+                        </StackPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Margin="0 0 0 0" Height="25">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Click">
+                                            <i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=FileTransfer.btn_download_file_Click}"
+                                                                   CommandParameter="{Binding .}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <icon:PackIconRemixIcon Kind="FileDownloadLine" Height="10" VerticalAlignment="Center"></icon:PackIconRemixIcon>
+                                            <Label Content="{DynamicResource 下载}" Margin="0 -2 0 0" Padding="0 0 5 0" VerticalContentAlignment="Center"></Label>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                                <Button Margin="5 0 0 0" Height="25">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Click">
+                                            <i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=FileTransfer.btn_delete_file_Click}"
+                                                                   CommandParameter="{Binding .}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <icon:PackIconRemixIcon Kind="DeleteRow" Height="10" VerticalAlignment="Center"></icon:PackIconRemixIcon>
+                                            <Label Content="{DynamicResource 删除}" Margin="0 -2 0 0" Padding="0 0 5 0" VerticalContentAlignment="Center"></Label>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                                <Button Margin="5 0 0 0" Height="25">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Click">
+                                            <i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=FileTransfer.btn_rename_file_Click}"
+                                                                   CommandParameter="{Binding .}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <icon:PackIconRemixIcon Kind="Edit2Line" Height="10" VerticalAlignment="Center"></icon:PackIconRemixIcon>
+                                            <Label Content="{DynamicResource 重命名}" Margin="0 -2 0 0" Padding="0 0 5 0" VerticalContentAlignment="Center"></Label>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <icon:PackIconRemixIcon Kind="FileDownloadLine" VerticalAlignment="Center"></icon:PackIconRemixIcon>
+                            <TextBlock Margin="5 0 0 0" Text="{DynamicResource 操作}"></TextBlock>
+                        </StackPanel>
+                    </DataGridTemplateColumn.Header>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>
